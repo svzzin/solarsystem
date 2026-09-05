@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Uma exploracao visual interativa do sistema solar." />
+    <title>Sistema Solar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Uma vizinhança cósmica</p>
+        <h1 id="page-title">O espaço entre<br /><em>nós e as estrelas</em></h1>
+        <p class="intro-copy">Navegue pelos oito mundos que orbitam a nossa estrela. Selecione um planeta para conhecer sua história.</p>
+      </section>
+
+      <section class="solar-system" aria-label="Sistema solar interativo">
+        <div class="space-dust space-dust--one" aria-hidden="true"></div>
+        <div class="space-dust space-dust--two" aria-hidden="true"></div>
+        <div class="space-dust space-dust--three" aria-hidden="true"></div>
+
+        <div class="orbit orbit--mercury" aria-hidden="true"></div>
+        <div class="orbit orbit--venus" aria-hidden="true"></div>
+        <div class="orbit orbit--earth" aria-hidden="true"></div>
+        <div class="orbit orbit--mars" aria-hidden="true"></div>
+        <div class="orbit orbit--jupiter" aria-hidden="true"></div>
+        <div class="orbit orbit--saturn" aria-hidden="true"></div>
+        <div class="orbit orbit--uranus" aria-hidden="true"></div>
+        <div class="orbit orbit--neptune" aria-hidden="true"></div>
+
+        <div class="sun" aria-label="Sol"><span>SOL</span></div>
+
+        <div class="planet-track planet-track--mercury">
+          <button class="planet planet--mercury" type="button" data-planet="mercury" aria-label="Abrir informacoes sobre Mercurio"><span class="planet-name">MERCURIO</span></button>
+        </div>
+        <div class="planet-track planet-track--venus">
+          <button class="planet planet--venus" type="button" data-planet="venus" aria-label="Abrir informacoes sobre Venus"><span class="planet-name">VENUS</span></button>
+        </div>
+        <div class="planet-track planet-track--earth">
+          <button class="planet planet--earth" type="button" data-planet="earth" aria-label="Abrir informacoes sobre a Terra"><span class="planet-name">TERRA</span></button>
+        </div>
+        <div class="planet-track planet-track--mars">
+          <button class="planet planet--mars" type="button" data-planet="mars" aria-label="Abrir informacoes sobre Marte"><span class="planet-name">MARTE</span></button>
+        </div>
+        <div class="planet-track planet-track--jupiter">
+          <button class="planet planet--jupiter" type="button" data-planet="jupiter" aria-label="Abrir informacoes sobre Jupiter"><span class="planet-name">JUPITER</span></button>
+        </div>
+        <div class="planet-track planet-track--saturn">
+          <button class="planet planet--saturn" type="button" data-planet="saturn" aria-label="Abrir informacoes sobre Saturno"><span class="planet-name">SATURNO</span></button>
+        </div>
+        <div class="planet-track planet-track--uranus">
+          <button class="planet planet--uranus" type="button" data-planet="uranus" aria-label="Abrir informacoes sobre Urano"><span class="planet-name">URANO</span></button>
+        </div>
+        <div class="planet-track planet-track--neptune">
+          <button class="planet planet--neptune" type="button" data-planet="neptune" aria-label="Abrir informacoes sobre Netuno"><span class="planet-name">NETUNO</span></button>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <span class="footer-status"><i aria-hidden="true"></i> SISTEMA ONLINE</span>
+        <span class="footer-instruction">PASSE O CURSOR E EXPLORE <b aria-hidden="true">&#8599;</b></span>
+      </footer>
+    </main>
+
+    <dialog class="modal" id="planet-modal" aria-labelledby="modal-title" aria-describedby="modal-description" hidden>
+      <div class="modal-backdrop" data-close-modal></div>
+      <article class="planet-card">
+        <button class="modal-close" type="button" data-close-modal aria-label="Fechar informacoes">&times;</button>
+        <div class="modal-visual" id="modal-visual" aria-hidden="true"><span id="modal-visual-label"></span></div>
+        <div class="modal-content">
+          <p class="eyebrow" id="modal-order"></p>
+          <h2 id="modal-title">Planeta selecionado</h2>
+          <p class="modal-description" id="modal-description"></p>
+          <dl class="planet-facts">
+            <div><dt>TIPO</dt><dd id="modal-type"></dd></div>
+            <div><dt>DISTANCIA DO SOL</dt><dd id="modal-distance"></dd></div>
+            <div><dt>ANO</dt><dd id="modal-year"></dd></div>
+          </dl>
+        </div>
+      </article>
+    </dialog>
+
+    <script type="module" src="js/script.js"></script>
+  </body>
+</html>

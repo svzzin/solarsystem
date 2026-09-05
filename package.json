@@ -1,0 +1,14 @@
+{
+  "name": "solarsystem",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ideia de sistema solar interativo",
+  "scripts": {
+    "build:css": "sass styles/styles.scss styles/styles.css --no-source-map --style=expanded",
+    "watch:css": "sass --watch styles/styles.scss:styles/styles.css",
+    "start": "npm run build:css && npx --yes serve -l 3000 ."
+  },
+  "devDependencies": {
+    "sass": "^1.77.8"
+  }
+}

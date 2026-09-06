@@ -6,7 +6,7 @@ const closeButtons = document.querySelectorAll('[data-close-modal]');
 const planetButtons = document.querySelectorAll('[data-planet]');
 let lastFocusedPlanet;
 
-function openPlanet(planetId) {
+export function openPlanet(planetId) {
   const planet = planets[planetId];
   if (!planet) return;
 
@@ -29,7 +29,7 @@ function openPlanet(planetId) {
   document.querySelector('.modal-close').focus();
 }
 
-function closePlanet() {
+export function closePlanet() {
   modal.classList.remove('is-visible');
   solarSystem.classList.remove('is-focused');
   document.body.classList.remove('modal-is-open');

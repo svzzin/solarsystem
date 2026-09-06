@@ -4,14 +4,33 @@ const modal = document.querySelector('#planet-modal');
 const solarSystem = document.querySelector('.solar-system');
 const closeButtons = document.querySelectorAll('[data-close-modal]');
 const planetButtons = document.querySelectorAll('[data-planet]');
+const zoomDuration = 650;
+const zoomScale = 2.2;
 let lastFocusedPlanet;
+
+function setZoomTarget(button) {
+  const sceneBounds = solarSystem.getBoundingClientRect();
+  const planetBounds = button.getBoundingClientRect();
+  const sceneCenter = {
+    x: sceneBounds.left + sceneBounds.width / 2,
+    y: sceneBounds.top + sceneBounds.height / 2,
+  };
+  const planetCenter = {
+    x: planetBounds.left + planetBounds.width / 2,
+    y: planetBounds.top + planetBounds.height / 2,
+  };
+
+  solarSystem.style.setProperty('--focus-x', `${(sceneCenter.x - planetCenter.x) * zoomScale}px`);
+  solarSystem.style.setProperty('--focus-y', `${(sceneCenter.y - planetCenter.y) * zoomScale}px`);
+}
 
 export function openPlanet(planetId) {
   const planet = planets[planetId];
   if (!planet) return;
 
   lastFocusedPlanet = document.activeElement;
-  solarSystem.classList.add('is-focused');
+  setZoomTarget(document.querySelector(`[data-planet="${planetId}"]`));
+  solarSystem.classList.add('is-zooming');
   document.body.classList.add('modal-is-open');
 
   document.querySelector('#modal-title').textContent = planet.name;
@@ -23,19 +42,21 @@ export function openPlanet(planetId) {
   document.querySelector('#modal-visual').className = `modal-visual modal-visual--${planetId}`;
   document.querySelector('#modal-visual-label').textContent = planet.name.toUpperCase();
 
-  modal.hidden = false;
-  modal.showModal();
-  requestAnimationFrame(() => modal.classList.add('is-visible'));
-  document.querySelector('.modal-close').focus();
+  window.setTimeout(() => {
+    modal.hidden = false;
+    modal.showModal();
+    requestAnimationFrame(() => modal.classList.add('is-visible'));
+    document.querySelector('.modal-close').focus();
+  }, zoomDuration);
 }
 
 export function closePlanet() {
   modal.classList.remove('is-visible');
-  solarSystem.classList.remove('is-focused');
-  document.body.classList.remove('modal-is-open');
+  solarSystem.classList.remove('is-zooming');
   window.setTimeout(() => {
     modal.close();
     modal.hidden = true;
+    document.body.classList.remove('modal-is-open');
   }, 280);
   if (lastFocusedPlanet) lastFocusedPlanet.focus();
 }

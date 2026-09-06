@@ -32,7 +32,8 @@ button {
   background: radial-gradient(circle at 50% 52%, #25291e 0, #151713 27%, #101110 62%);
 }
 
-.app-shell::before, .app-shell::after {
+.app-shell::before,
+.app-shell::after {
   position: absolute;
   pointer-events: none;
   content: "";
@@ -143,12 +144,14 @@ h1 em {
   height: min(82vw, 920px, 100svh - 100px);
   margin: max(60px, 5vh) auto 0;
   aspect-ratio: 1;
-  transition: filter 0.4s ease, transform 0.4s ease;
+  perspective: 900px;
+  transform-origin: 50% 50%;
+  transition: filter 0.65s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.solar-system.is-focused {
-  filter: blur(7px);
-  transform: scale(1.04);
+.solar-system.is-zooming {
+  filter: saturate(1.15) brightness(0.72);
+  transform: translate3d(var(--focus-x), var(--focus-y), 0) scale(2.2) rotateX(7deg) rotateZ(-1.5deg);
 }
 
 .orbit {
@@ -272,7 +275,8 @@ h1 em {
   white-space: nowrap;
 }
 
-.planet:hover .planet-name, .planet:focus-visible .planet-name {
+.planet:hover .planet-name,
+.planet:focus-visible .planet-name {
   opacity: 1;
   transform: translate(-50%, 0);
 }
@@ -520,7 +524,8 @@ h1 em {
   line-height: 1;
 }
 
-.modal-close:hover, .modal-close:focus-visible {
+.modal-close:hover,
+.modal-close:focus-visible {
   border-color: #d9f26d;
   color: #d9f26d;
   outline: none;
@@ -739,9 +744,13 @@ h1 em {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
 }
+
+/*# sourceMappingURL=styles.css.map */

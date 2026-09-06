@@ -100,6 +100,10 @@ describe('interacoes dos planetas', () => {
     const trigger = document.querySelector('[data-planet="mars"]');
 
     openPlanet('mars');
+    expect(document.querySelector('.solar-system').classList.contains('is-zooming')).toBe(true);
+    expect(document.querySelector('.solar-system').style.getPropertyValue('--focus-x')).not.toBe('');
+    expect(document.querySelector('.solar-system').style.getPropertyValue('--focus-y')).not.toBe('');
+    jest.advanceTimersByTime(650);
 
     expect(document.querySelector('#modal-title').textContent).toBe('Marte');
     expect(document.querySelector('#modal-order').textContent).toBe(planets.mars.order);
@@ -118,6 +122,7 @@ describe('interacoes dos planetas', () => {
     const trigger = document.querySelector('[data-planet="jupiter"]');
 
     trigger.click();
+    jest.advanceTimersByTime(650);
 
     expect(document.querySelector('#modal-title').textContent).toBe('Júpiter');
   });
@@ -132,6 +137,7 @@ describe('interacoes dos planetas', () => {
     jest.advanceTimersByTime(280);
 
     expect(document.querySelector('#planet-modal').close).toHaveBeenCalled();
+    expect(document.querySelector('.solar-system').classList.contains('is-zooming')).toBe(false);
     expect(document.activeElement).toBe(trigger);
 
     closePlanet();
@@ -148,6 +154,7 @@ describe('interacoes dos planetas', () => {
     expect(modal.close).toHaveBeenCalled();
 
     openPlanet('venus');
+    jest.advanceTimersByTime(650);
     document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
     jest.advanceTimersByTime(280);
     expect(modal.close.mock.calls.length).toBeGreaterThanOrEqual(2);
